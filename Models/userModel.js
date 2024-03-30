@@ -1,9 +1,10 @@
-import mongoose from "mongoose";
+import mongoose, { Schema } from "mongoose";
 import validator from "validator";
-import bcrypt, { getSalt } from "bcryptjs";
+import pkg from 'bcryptjs';
+const { genSalt, hash, compare } = pkg;
 import jwt from "jsonwebtoken";
 
-const userSchema = new mongoose.Schema({
+const userSchema = new Schema({
     firstName: {
         type: String,
         required: [true, "Please enter your first name"],
@@ -49,16 +50,24 @@ userSchema.pre("save", async function () {
     if (!this.isModified("password")) {
         return
     }
-    const salt = await getSalt(10)
-    this.password = await bcrypt.hash(this.password, salt)
+    const salt = await genSalt(10)
+    this.password = await hash(this.password, salt)
 });
 
-//Check password
-userSchema.methods.matchPassword = async function (enteredPassword) {
-    return await bcrypt.compare(enteredPassword, this.password)
-}
+userSchema.pre("findOneAndUpdate", async function () {
+    if (!this._update.password) {
+        return
+    }
+    const salt = await genSalt(10)
+    this._update.password = await hash(this._update.password, salt)
+});
 
-//JWT token
+// Check password
+userSchema.methods.comparePassword = async function (userPassword) {
+    return await compare(userPassword, this.password);
+};
+
+// JWT token generation
 userSchema.methods.getSignedToken = function () {
     return jwt.sign({ userId: this._id }, process.env.JWT_SECRET_KEY, { expiresIn: "1d" })
 }
