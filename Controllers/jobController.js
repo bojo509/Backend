@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import Jobs from "../models/jobsModel.js";
+import Jobs from "../Models/jobsModel.js";
 import Companies from "../Models/companiesModel.js";
 
 //POST: Upload a job - works
