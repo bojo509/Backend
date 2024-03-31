@@ -125,7 +125,7 @@ export const updateCompanyProfile = async (req, res, next) => {
         })
     } catch (error) {
         console.log(error)
-        return res.status(404).send({status: "failed", message: error.message})
+        return res.status(400).send({status: "failed", message: error.message})
     }
 }
 
