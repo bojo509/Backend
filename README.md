@@ -5,7 +5,7 @@ This is the api that interacts with the database. All of the endpoints are liste
 
 
 
-### Auth
+## Auth
 
 #### Register
 `POST /auth/register`
@@ -23,7 +23,7 @@ Information needed in the body of the request:
 - email
 - password
 
-### Users
+## Users
 
 #### Get user Info
 `POST /users/get-user`
@@ -60,7 +60,7 @@ Information needed in the body of the request:
 
 Mainly used for testing purposes.
 
-### Jobs
+## Jobs
 
 #### Get all job posts
 
@@ -125,7 +125,7 @@ A desc object should contain experience and vacancies
 | :-------- | :------- | :------------------------- |
 | `id` | `int` | Id of the job post   |
 
-### Companies
+## Companies
 
 #### Register
 
