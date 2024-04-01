@@ -8,9 +8,9 @@ This is the api that interacts with the database. All of the endpoints are liste
 ### Auth
 
 #### Register
-```http
+`
   POST /auth/register
-```
+`
 
 Information needed in the body of the request: 
 - firstName - string
