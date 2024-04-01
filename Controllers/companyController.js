@@ -41,7 +41,7 @@ export const register = async (req, res, next) => {
         })
     } catch (error) {
         console.log(error)
-        return res.status(400).send({status: "failed", message: error.message})
+        return res.status(400).send({ status: "Failed", message: error.message })
     }
 }
 
@@ -79,7 +79,7 @@ export const signIn = async (req, res, next) => {
         })
     } catch (error) {
         console.log(error)
-        return res.status(400).send({status: "failed", message: error.message})
+        return res.status(400).send({ status: "Failed", message: error.message })
     }
 }
 
@@ -125,33 +125,33 @@ export const updateCompanyProfile = async (req, res, next) => {
         })
     } catch (error) {
         console.log(error)
-        return res.status(400).send({status: "failed", message: error.message})
+        return res.status(400).send({ status: "Failed", message: error.message })
     }
 }
 
 //POST: Gets company's profile - works
 export const getCompanyProfile = async (req, res, next) => {
     try {
-      const id = req.body.user.userId;
-      const company = await Companies.findById({ _id: id });
-  
-      if (!company) {
-        return res.status(404).send({
-          status: "Failed",
-          message: "Company Not Found",
+        const id = req.body.user.userId;
+        const company = await Companies.findById({ _id: id });
+
+        if (!company) {
+            return res.status(404).send({
+                status: "Failed",
+                message: "Company Not Found"
+            });
+        }
+
+        company.password = undefined;
+        res.status(200).json({
+            status: "Succeeded",
+            data: company,
         });
-      }
-  
-      company.password = undefined;
-      res.status(200).json({
-        status: "Succeeded",
-        data: company,
-      });
     } catch (error) {
-      console.log(error);
-      return res.status(400).send({status: "failed", message: error.message})
+        console.log(error);
+        return res.status(400).send({ status: "Failed", message: error.message })
     }
-  };
+};
 
 //GET: Get all companies - works
 export const getCompanies = async (req, res, next) => {
@@ -211,7 +211,7 @@ export const getCompanies = async (req, res, next) => {
         });
     } catch (error) {
         console.log(error);
-        return res.status(400).send({status: "failed", message: error.message})
+        return res.status(400).send({ status: "Failed", message: error.message })
     }
 };
 
@@ -258,7 +258,7 @@ export const getCompanyJobListing = async (req, res, next) => {
         });
     } catch (error) {
         console.log(error);
-        return res.status(400).send({status: "failed", message: error.message})
+        return res.status(400).send({ status: "Failed", message: error.message })
     }
 };
 
@@ -276,8 +276,8 @@ export const getCompanyById = async (req, res, next) => {
 
         if (!company) {
             return res.status(200).send({
-                message: "Company Not Found",
                 status: "Failed",
+                message: "Company Not Found"
             });
         }
 
@@ -289,6 +289,6 @@ export const getCompanyById = async (req, res, next) => {
         });
     } catch (error) {
         console.log(error);
-        return res.status(400).send({status: "failed", message: error.message})
+        return res.status(400).send({ status: "Failed", message: error.message })
     }
 };

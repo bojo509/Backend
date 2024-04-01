@@ -5,13 +5,13 @@ const userAuth = async (req, res, next) => {
     const authHandler = req?.headers?.authorization;
 
     if (!authHandler || !authHandler.startsWith("Bearer")) {
-        next("Unauthorized access")
+        return next("Unauthorized access")
     }
 
     const token = authHandler?.split(" ")[1];
 
     if (!token) {
-        next("Auth failed: no token provided")
+        return next("Auth failed: no token provided")
     }
 
     try {
@@ -23,7 +23,7 @@ const userAuth = async (req, res, next) => {
         next();
     } catch (error) {
         console.log(error)
-        next("Auth failed")
+        return next("Auth failed")
     }
 }
 

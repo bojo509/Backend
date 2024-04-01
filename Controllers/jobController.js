@@ -61,7 +61,7 @@ export const createJob = async (req, res, next) => {
     });
   } catch (error) {
     console.log(error);
-    return res.status(400).send({ message: error.message });
+    return res.status(400).send({ status: "Failed", message: error.message })
   }
 };
 
@@ -109,13 +109,13 @@ export const updateJob = async (req, res, next) => {
     await Jobs.findByIdAndUpdate(jobId, jobPost, { new: true });
 
     res.status(200).json({
-      success: true,
+      status: "Succeeded",
       message: "Job Post Updated Successfully",
       jobPost,
     });
   } catch (error) {
     console.log(error);
-    return res.status(400).send({ message: error.message });
+    return res.status(400).send({ status: "Failed", message: error.message })
   }
 };
 
@@ -267,6 +267,6 @@ export const deleteJobPost = async (req, res, next) => {
     }
   } catch (error) {
     console.log(error);
-    return res.status(400).send({ message: error.message });
+    return res.status(400).send({ status: "Failed", message: error.message })
   }
 };

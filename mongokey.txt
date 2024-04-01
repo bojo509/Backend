@@ -1,1 +1,0 @@
-mongodb+srv://bkumanov6:3KM2pUole68KyIfk@jobifycluster.kdmxvxu.mongodb.net/

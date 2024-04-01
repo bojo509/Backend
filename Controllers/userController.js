@@ -42,7 +42,7 @@ export const updateUser = async (req, res, next) => {
         res.status(200).json({ status: "Succeeded", message: "User updated succesfully", user, token });
     } catch (error) {
         console.log(error)
-        return res.status(400).send({ status: "failed", message: error.message })
+        return res.status(400).send({ status: "Failed", message: error.message })
     }
 }
 
@@ -62,7 +62,7 @@ export const getUser = async (req, res, next) => {
 
     } catch (error) {
         console.log(error)
-        return res.status(400).send({ status: "failed", message: error.message })
+        return res.status(400).send({ status: "Failed", message: error.message })
     }
 }
 
@@ -88,6 +88,6 @@ export const deleteUser = async (req, res, next) => {
         }
     } catch (error) {
         console.log(error);
-        return res.status(400).send({ message: error.message });
+        return res.status(400).send({ status: "Failed", message: error.message })
     }
 };
