@@ -28,7 +28,8 @@ const companySchema = new Schema({
         type: String
     },
     profileUrl: {
-        type: String
+        type: String,   
+        default: "https://res.cloudinary.com/docscbcto/image/upload/v1712236460/JobifyApp/bnpuuomlttvfyrkpmtdt.png"
     },
     about: {
         type: String
