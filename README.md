@@ -5,12 +5,10 @@ This is the api that interacts with the database. All of the endpoints are liste
 
 
 
-### Auth
+## Auth
 
 #### Register
-```http
-  POST /auth/register
-```
+`POST /auth/register`
 
 Information needed in the body of the request: 
 - firstName - string
@@ -19,29 +17,23 @@ Information needed in the body of the request:
 - password - string
 
 #### Login
-```http
-  POST /auth/login
-```
+`POST /auth/login`
 
 Information needed in the body of the request: 
 - email
 - password
 
-### Users
+## Users
 
 #### Get user Info
-```http
-  POST /users/get-user
-```
+`POST /users/get-user`
 
 | Parameter | Type     | Description                |
 | :-------- | :------- | :------------------------- |
 | `JWT` | `string` | Json web token, includes userId |
 
 #### Update user Info
-```http
-  PUT /users/update-user
-```
+`PUT /users/update-user`
 
 | Parameter | Type     | Description                |
 | :-------- | :------- | :------------------------- |
@@ -60,9 +52,7 @@ Information needed in the body of the request:
 - about - string
 
 #### Delete user
-```http
-  DELETE /users/delete-user/${id}
-```
+`DELETE /users/delete-user/${id}`
 
 | Parameter | Type     | Description                |
 | :-------- | :------- | :------------------------- |
@@ -70,19 +60,15 @@ Information needed in the body of the request:
 
 Mainly used for testing purposes.
 
-### Jobs
+## Jobs
 
 #### Get all job posts
 
-```http
-  GET /jobs/get-all
-```
+`GET /jobs/get-all`
 
 #### Get job details by id
 
-```http
-  GET /jobs/get-job-details/${id}
-```
+`GET /jobs/get-job-details/${id}`
 
 | Parameter | Type     | Description                |
 | :-------- | :------- | :------------------------- |
@@ -90,9 +76,7 @@ Mainly used for testing purposes.
 
 #### Upload a job post
 
-```http
-  POST /jobs/upload-job
-```
+`POST /jobs/upload-job`
 
 | Parameter | Type     | Description                |
 | :-------- | :------- | :------------------------- |
@@ -113,9 +97,7 @@ A desc object should contain experience and vacancies
 
 #### Update a job post
 
-```http
-  PUT /jobs/update-job/${id}
-```
+`PUT /jobs/update-job/${id}`
 
 | Parameter | Type     | Description                |
 | :-------- | :------- | :------------------------- |
@@ -137,21 +119,17 @@ A desc object should contain experience and vacancies
 
 #### Delete a job post
 
-```http
-  DELETE /jobs/delete-job/${id}
-```
+`DELETE /jobs/delete-job/${id}`
 
 | Parameter | Type     | Description                |
 | :-------- | :------- | :------------------------- |
 | `id` | `int` | Id of the job post   |
 
-### Companies
+## Companies
 
 #### Register
 
-```http
-  POST /companies/register
-```
+`POST /companies/register`
 
 Information needed in the body of the request: 
 - name - string
@@ -160,9 +138,7 @@ Information needed in the body of the request:
 
 #### Login
 
-```http
-  POST /companies/login
-```
+`POST /companies/login`
 
 Information needed in the body of the request: 
 - email - string
@@ -170,24 +146,18 @@ Information needed in the body of the request:
 
 #### Get all companies
 
-```http
-  GET /companies/get-all
-```
+`GET /companies/get-all`
 
 #### Get company details by id
 
-```http
-  GET /companies/get-company-by-id/${id}
-```
+`GET /companies/get-company-by-id/${id}`
 
 | Parameter | Type     | Description                |
 | :-------- | :------- | :------------------------- |
 | `id` | `int` | Id of the company profile   |
 
 #### Get company Info
-```http
-  POST /companies/get-company-profile
-```
+`POST /companies/get-company-profile`
 
 | Parameter | Type     | Description                |
 | :-------- | :------- | :------------------------- |
@@ -196,9 +166,7 @@ Information needed in the body of the request:
 JWT should be included in the auth of the request
 
 #### Get company job listings
-```http
-  POST /companies/get-company-job-listing
-```
+`POST /companies/get-company-job-listing`
 
 | Parameter | Type     | Description                |
 | :-------- | :------- | :------------------------- |
@@ -207,9 +175,7 @@ JWT should be included in the auth of the request
 JWT should be included in the auth of the request
 
 #### Update company info
-```http
-  PUT /companies/update-company-profile
-```
+`PUT /companies/update-company-profile`
 
 | Parameter | Type     | Description                |
 | :-------- | :------- | :------------------------- |
