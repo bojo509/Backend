@@ -12,7 +12,6 @@ const limiter = rateLimit({
 
 const router = express.Router();
 
-//Register and signIn functions are imported from the authController.js file
 router.post("/register", limiter, register);
 router.post("/login", limiter, signIn);
 

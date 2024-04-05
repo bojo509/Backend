@@ -12,17 +12,11 @@ const limiter = rateLimit({
     legacyHeaders: false,
 });
 
-//Register works
 router.post("/register", limiter, register);
-//Login works
 router.post("/login", limiter, signIn);
-
-
 router.post("/get-company-profile", userAuth, getCompanyProfile);
 router.post("/get-company-job-listings", userAuth, getCompanyJobListing);
-//Works
-router.get("/get-all", getCompanies);
-//Doesnt work
+router.get("/", getCompanies);
 router.get("/get-company-by-id/:id", getCompanyById);
 
 router.put("/update-company-profile", userAuth, updateCompanyProfile);
