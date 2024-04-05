@@ -33,7 +33,12 @@ const jobSchema = new Schema({
         min: [0, "you can't have negative experience"],
         default: 0
     },
-    details: [{ desc: String, requirements: [{ type: String }] }],
+    desc: {
+        type: String,
+    },
+    requirements: { 
+        type: String 
+    },
     applicants: [{ type: Schema.Types.ObjectId, ref: "Users" }]
 }, { timestamps: true });
 
