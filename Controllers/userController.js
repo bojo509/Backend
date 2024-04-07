@@ -2,10 +2,10 @@ import mongoose from "mongoose";
 import Users from "../Models/userModel.js";
 
 export const updateUser = async (req, res, next) => {
-    const { firstName, lastName, email, password, location, profileUrl, jobTitle, about } = req.body;
+    const { firstName, lastName, email, contact, location, profileUrl, cvUrl, jobTitle, about } = req.body;
 
     try {
-        if (!firstName || !lastName || !email || !password || !location || !profileUrl || !jobTitle || !about) {
+        if (!firstName || !lastName || !email || !contact || !location || !profileUrl || !cvUrl || !jobTitle || !about) {
             return next("All fields are required")
         }
 
@@ -19,9 +19,10 @@ export const updateUser = async (req, res, next) => {
             firstName,
             lastName,
             email,
-            password,
+            contact,
             location,
             profileUrl,
+            cvUrl,
             jobTitle,
             about,
             _id: id
@@ -91,3 +92,30 @@ export const deleteUser = async (req, res, next) => {
         return res.status(400).send({ status: "Failed", message: error.message })
     }
 };
+
+export const getUserAsACompany = async (req, res, next) => {
+    try {
+        const { id } = req.params;
+        const user = await Users.findById({ _id: id });
+        if (!user) {
+            return next("No user found")
+        }
+        user.password = undefined;
+        res.status(200).json({
+            status: "Succeeded",
+            firstName: user.firstName,
+            lastName: user.lastName,
+            email: user.email,
+            contact: user.contact,
+            location: user.location,
+            profileUrl: user.profileUrl,
+            cvUrl: user.cvUrl,
+            jobTitle: user.jobTitle,
+            about: user.about
+        })
+
+    } catch (error) {
+        console.log(error)
+        return res.status(400).send({ status: "Failed", message: error.message })
+    }
+}

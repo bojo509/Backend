@@ -272,3 +272,42 @@ export const deleteJobPost = async (req, res, next) => {
     return res.status(400).send({ status: "Failed", message: error.message })
   }
 };
+
+export const applyToJob = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const userId = req.body.user.userId;
+
+    if (!mongoose.Types.ObjectId.isValid(id))
+      return res.status(404).send(`No Job with id: ${id}`);
+
+    const job = await Jobs.findById(id);
+    if (!job) {
+      return res.status(404).send({
+        status: "Failed",
+        message: "Job Post Not Found"
+      });
+    }
+
+    // Add the user's ID to the applicants array if it's not already there
+    if (!job.applicants.includes(userId)) {
+      job.applicants.push(userId);
+      await job.save();
+    }
+    else{
+      return res.status(400).send({
+        status: "Failed",
+        message: "You have already applied to this job"
+      });
+    }
+
+    res.status(200).json({
+      status: "Succeeded",
+      message: "Applied to Job Successfully",
+      job,
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(400).send({ status: "Failed", message: error.message })
+  }
+};

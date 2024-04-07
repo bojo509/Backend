@@ -37,7 +37,10 @@ const userSchema = new Schema({
     },
     profileUrl: {
         type: String,
-        default: "https://res.cloudinary.com/docscbcto/image/upload/v1712236460/JobifyApp/bnpuuomlttvfyrkpmtdt.png"
+        default: "https://res.cloudinary.com/docscbcto/image/upload/v1712489694/JobifyApp/ehxn4kco6lnz2hgjqprf.png"
+    },
+    cvUrl: {
+        type: String
     },
     jobTitle: {
         type: String
