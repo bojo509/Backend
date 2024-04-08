@@ -311,3 +311,47 @@ export const applyToJob = async (req, res, next) => {
     return res.status(400).send({ status: "Failed", message: error.message })
   }
 };
+
+export const getApplications = async (req, res, next) => {
+  try {
+    const userId = req.body.user.userId;  // Get the user's ID from the request object
+
+    // Find all jobs where the applicants array contains the user's ID
+    const jobs = await Jobs.find({ applicants: { $in: [userId] } }).populate('company', 'profileUrl name -password');
+
+    res.status(200).json({
+      status: "Succeeded",
+      message: "Retrieved Applied Jobs Successfully",
+      jobs,
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(400).send({ status: "Failed", message: error.message })
+  }
+};
+
+export const checkApplication = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const userId = req.body.user.userId;  // Get the user's ID from the request object
+
+    const job = await Jobs.findById(id);
+    if (!job) {
+      return res.status(404).send({
+        status: "Failed",
+        message: "Job Post Not Found"
+      });
+    }
+
+    // Check if the user's ID is in the applicants array
+    const hasApplied = job.applicants.includes(userId);
+
+    res.status(200).json({
+      status: "Succeeded",
+      hasApplied: hasApplied
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(400).send({ status: "Failed", message: error.message })
+  }
+};
