@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 import Jobs from "../Models/jobsModel.js";
 import Companies from "../Models/companiesModel.js";
+import Users from "../Models/userModel.js";
 
 //POST: Upload a job - works
 export const createJob = async (req, res, next) => {
@@ -349,6 +350,40 @@ export const checkApplication = async (req, res, next) => {
     res.status(200).json({
       status: "Succeeded",
       hasApplied: hasApplied
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(400).send({ status: "Failed", message: error.message })
+  }
+};
+
+
+export const getApplicants = async (req, res, next) => {
+  try {
+    const { id } = req.params;  // Get the job's ID from the request object
+    const userId = req.body.user.userId;  // Get the user's ID from the request object
+
+    // Find the job by its ID and populate the applicants field
+    const job = await Jobs.findById(id).populate('applicants');
+
+    if (!job) {
+      return res.status(404).send({
+        status: "Failed",
+        message: "Job Post Not Found"
+      });
+    }
+
+    if (job.company.toString() !== userId) {
+      return res.status(403).send({
+        status: "Failed",
+        message: "Unauthorized"
+      });
+    }
+
+    res.status(200).json({
+      status: "Succeeded",
+      message: "Retrieved Applicants Successfully",
+      applicants: job.applicants,
     });
   } catch (error) {
     console.log(error);
