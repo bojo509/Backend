@@ -1,7 +1,6 @@
 import mongoose from "mongoose";
 import Jobs from "../Models/jobsModel.js";
 import Companies from "../Models/companiesModel.js";
-import Users from "../Models/userModel.js";
 
 //POST: Upload a job - works
 export const createJob = async (req, res, next) => {
