@@ -13,7 +13,7 @@ export const deleteAllJobs = async (req, res) => {
       company.jobPosts = [];
       await company.save();
   
-      res.status(200).json({ message: 'All jobs deleted successfully' });
+      res.status(200).json({ status: "Succeeded", message: 'All jobs deleted successfully' });
     } catch (error) {
       res.status(500).json({ error: 'An error occurred while deleting jobs' });
     }
