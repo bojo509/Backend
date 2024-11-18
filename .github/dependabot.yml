@@ -4,8 +4,6 @@ updates:
     directory: "/"
     schedule:
       interval: "daily"
-      time: "21:35"
-      timezone: "Europe/Sofia"
     commit-message:
       prefix: "fix"
     open-pull-requests-limit: 10
